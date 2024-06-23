@@ -3,6 +3,7 @@ package code;
 import basemod.abstracts.CustomEnergyOrb;
 import basemod.abstracts.CustomPlayer;
 import basemod.animations.SpriterAnimation;
+import code.cards.LambsRespite;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.math.MathUtils;
@@ -65,6 +66,7 @@ public class CharacterFile extends CustomPlayer {
         for (int i = 0; i < 4; i++) {
             retVal.add(Defend.ID);
         }
+        retVal.add(LambsRespite.ID);
         return retVal;
     }
 

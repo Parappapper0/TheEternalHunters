@@ -1,4 +1,4 @@
-package code.potions;
+/*package code.potions;
 
 import basemod.BaseMod;
 import code.CharacterFile;
@@ -33,4 +33,4 @@ public class DemoPotion extends AbstractEasyPotion {
     public void addAdditionalTips() {
         tips.add(new PowerTip(BaseMod.getKeywordTitle(makeID("todo")), BaseMod.getKeywordDescription(makeID("todo"))));
     }
-}
+}*/

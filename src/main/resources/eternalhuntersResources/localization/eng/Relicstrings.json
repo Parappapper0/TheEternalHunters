@@ -1,9 +1,12 @@
 {
-  "${ModID}:TodoItem": {
-    "NAME": "Todo Item",
-    "FLAVOR": "TODO: make this a sweet relic.",
+  "${ModID}:MaskOfTheKindred": {
+    "NAME": "Mask of The Kindred",
+    "FLAVOR": "The Hunt Begins.",
     "DESCRIPTIONS": [
-      "Has no effect."
+      "Mark 7 Fights per Act.",
+      "NL Defeating a Marked floor grants 1 Mark permanently.",
+      "NL At 4 Marks draw 1 more card per turn. For every 3 Marks after that draw 1 more.",
+      "NL Some cards scale with Marks."
     ]
   }
 }

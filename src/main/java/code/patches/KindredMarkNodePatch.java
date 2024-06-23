@@ -29,6 +29,7 @@ public class KindredMarkNodePatch {
     private static final Map<MapRoomNode, Boolean> isMarked = new HashMap<>();
     private static boolean roomsProcessed = false;
     private static final int NUM_MARKED_NODES = 7;
+    private static final int MIN_DISTANCE = 3; // Minimum distance between marked nodes
 
     @SpirePrefixPatch
     public static void mapRenderingPatch(MapRoomNode __instance, SpriteBatch sb) {
@@ -87,19 +88,48 @@ public class KindredMarkNodePatch {
             }
         }
 
-        // Shuffle and select nodes to mark
-        Collections.shuffle(eligibleNodes, AbstractDungeon.mapRng.random);
-        List<MapRoomNode> markedNodes = eligibleNodes.subList(0, Math.min(NUM_MARKED_NODES, eligibleNodes.size()));
+        if (eligibleNodes.size() < NUM_MARKED_NODES) {
+            throw new RuntimeException("Not enough eligible nodes to mark.");
+        }
+
+        // Ensure the selected nodes are far enough apart
+        List<MapRoomNode> markedNodes = new ArrayList<>();
+        int currentMinDistance = MIN_DISTANCE;
+        while (markedNodes.size() < NUM_MARKED_NODES) {
+            markedNodes.clear();
+            Collections.shuffle(eligibleNodes, AbstractDungeon.mapRng.random);
+            for (MapRoomNode node : eligibleNodes) {
+                if (markedNodes.size() >= NUM_MARKED_NODES) break;
+                boolean tooClose = false;
+                for (MapRoomNode markedNode : markedNodes) {
+                    if (distance(node, markedNode) < currentMinDistance) {
+                        tooClose = true;
+                        break;
+                    }
+                }
+                if (!tooClose && node.y != 0) {
+                    markedNodes.add(node);
+                }
+            }
+            currentMinDistance--; // Reduce the minimum distance if not enough nodes are marked
+            if (currentMinDistance < 0) break; // Ensure we don't go into negative distance
+        }
 
         // Mark the selected nodes
         for (MapRoomNode node : markedNodes) {
             isMarked.put(node, true);
         }
 
-        System.out.println("Processed rooms for marking:");
+        System.out.println("Processed rooms for marking: " + markedNodes.size() + " nodes marked.");
         for (MapRoomNode node : markedNodes) {
             System.out.println("Node at (" + node.x + ", " + node.y + ") marked.");
         }
+    }
+
+    private static int distance(MapRoomNode node1, MapRoomNode node2) {
+        int dx = node1.x - node2.x;
+        int dy = node1.y - node2.y;
+        return Math.abs(dx) + Math.abs(dy);
     }
 
     public static void resetRoomsProcessed() {
