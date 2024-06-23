@@ -1,0 +1,13 @@
+{
+  "${ModID}:ModdedCharacter": {
+    "NAMES": [
+      "The Eternal Hunters",
+      "the Eternal Hunters"
+    ],
+    "TEXT": [
+      "Kindred, the representation of the twin essences of death.",
+      "NL Lamb’s bow offers a swift release from the mortal realm for those who accept their fate. NL Wolf hunts down those who run from their end, delivering violent finality within his crushing jaws.",
+      "Navigating an unlit street, you come across several hooded figures in the midst of some dark ritual. As you approach, they turn to you in eerie unison. The tallest among them bares fanged teeth and extends a long, pale hand towards you. NL ~\"Join~ ~us~ ~Kindred:~ ,~ ~and~ ~feel~ ~the~ ~warmth~ ~of~ ~the~ ~Spire.\"~"
+    ]
+  }
+}
